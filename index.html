@@ -6,9 +6,9 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="apple-mobile-web-app-title" content="생윤노트">
+<meta name="apple-mobile-web-app-title" content="노트">
 <meta name="theme-color" content="#ffffff">
-<title>생윤 개념노트</title>
+<title>노트</title>
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
 <link rel="icon" href="icons/icon-192.png">
@@ -40,7 +40,6 @@ aside{width:272px;flex:none;border-right:1px solid var(--line);background:var(--
 .car{width:10px;color:var(--sub);font-size:11px}
 .cnt{color:var(--sub);font-size:11px;margin-right:2px}
 .uh .ib{width:26px;height:26px;font-size:13px}
-.th{font-size:11px;color:var(--sub);padding:6px 6px 1px 22px}
 .ni{display:block;width:100%;text-align:left;padding:5px 8px 5px 22px;border-radius:7px;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .ni:hover{background:var(--soft)}
 .ni.on{background:var(--blue-l);color:var(--blue);font-weight:400}
@@ -62,16 +61,15 @@ main{flex:1;min-width:0;overflow:auto;-webkit-overflow-scrolling:touch;padding:v
 .tbtn.pri{background:var(--blue);border-color:var(--blue);color:#fff}
 .tbtn.danger{color:#b27a76}
 .empty{color:var(--sub);text-align:center;padding:22vh 20px;font-size:13px;line-height:2}
-#editor,#cmp{max-width:820px;margin:0 auto;padding:0 20px}
+#editor{max-width:820px;margin:0 auto;padding:0 20px}
 .row{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
 .ed-top{padding:8px 0 6px}
-#unitSel,#thinker{border:0;background:transparent;font-size:16px;transform:scale(.75);transform-origin:left center;color:var(--sub);margin-right:-20px}
+#unitSel{border:0;background:transparent;font-size:16px;transform:scale(.75);transform-origin:left center;color:var(--sub);margin-right:-20px}
 #unitSel{-webkit-appearance:none;appearance:none;max-width:200px}
-#thinker{width:180px}
 #title{display:block;width:100%;border:0;background:transparent;font-size:20px;font-weight:400;padding:6px 0 4px;margin-top:2px}
-#title::placeholder,#thinker::placeholder{color:#c6c2bb}
-.stars button{color:#d6d3cd;font-size:13px;padding:0 1px}
-.stars button.on{color:var(--blue)}
+#title::placeholder{color:#c6c2bb}
+#star{color:#d6d3cd;font-size:14px;padding:0 4px}
+#star.on{color:var(--blue)}
 
 /* toolbar */
 .tbwrap{position:sticky;top:0;z-index:5;background:var(--bg);padding:6px 0;border-bottom:1px solid var(--line);margin-bottom:6px}
@@ -97,23 +95,16 @@ main{flex:1;min-width:0;overflow:auto;-webkit-overflow-scrolling:touch;padding:v
 #palGrid button:active{background:var(--blue-l)}
 .pe{grid-column:1/-1;color:var(--sub);font-size:11.5px;padding:8px}
 
-/* sections */
-.sec{padding:10px 0 6px;border-bottom:1px solid var(--soft)}
-.sl{font-size:10.5px;color:var(--sub);letter-spacing:.06em;margin-bottom:2px}
-.rt{min-height:24px;outline:none;font-size:16px;zoom:.86;line-height:1.75;word-break:keep-all;overflow-wrap:anywhere}
+/* body */
+#secs{padding:10px 0}
+.rt{min-height:60dvh;outline:none;font-size:16px;zoom:.86;line-height:1.75;word-break:keep-all;overflow-wrap:anywhere}
 .rt:empty::before{content:attr(data-ph);color:#cbc7c0}
-.sec-core .rt{color:var(--blue);font-weight:400}
 .rt b,.rt strong,.doc b,.doc strong{font-weight:600}
 .rt ul,.rt ol{margin:2px 0;padding-left:22px}
 .rt p,.rt div{margin:0}
 .rt table{border-collapse:collapse;width:100%;margin:6px 0;font-size:.93em}
 .rt td,.rt th{border:1px solid #d9d6cf;padding:4px 8px;vertical-align:top;min-width:40px;font-weight:300;text-align:left}
 .rt table.hd tr:first-child>*,.rt table.hc tr>*:first-child{background:#f1f0ec;font-weight:500}
-
-/* compare */
-#cmp .row{padding:8px 0 12px}
-.ct{font-weight:500;font-size:14px}
-#cmpBody{overflow-x:auto}
 
 /* menu / modal */
 .menu{position:fixed;z-index:50;background:#fff;border:1px solid var(--line);border-radius:10px;box-shadow:0 6px 24px rgba(0,0,0,.08);padding:4px;min-width:130px}
@@ -129,11 +120,6 @@ main{flex:1;min-width:0;overflow:auto;-webkit-overflow-scrolling:touch;padding:v
 .note-s{font-size:11px;color:var(--sub);line-height:1.6;margin-top:10px}
 .opt{display:flex;align-items:center;gap:8px;padding:6px 2px;font-size:13px}
 .opt input{accent-color:var(--blue)}
-.pick{max-height:46dvh;overflow:auto;border:1px solid var(--line);border-radius:8px;background:#fff;padding:4px 8px;margin-top:8px}
-.pick .pu{font-size:11px;color:var(--sub);padding:8px 0 2px}
-.pick label{display:flex;gap:8px;align-items:center;padding:4px 0;font-size:13px}
-.pick small{color:var(--sub)}
-.mbox .search{margin:0;width:calc(100%/.84)}
 .dlg{z-index:60}.dlg .mbox{max-width:340px}.dmsg{font-size:13.5px;line-height:1.7;margin-bottom:10px}.dlg .fi{margin-top:4px}.tbtn.dng{background:#b27a76;border-color:#b27a76;color:#fff}
 
 #print{display:none}
@@ -144,7 +130,7 @@ main{flex:1;min-width:0;overflow:auto;-webkit-overflow-scrolling:touch;padding:v
   body.side #scrim{display:block;position:fixed;inset:0;z-index:25;background:rgba(60,58,54,.15)}
   .menu-b{display:inline-flex}
   .mh{padding:8px 12px 2px}
-  #editor,#cmp{padding:0 16px}
+  #editor{padding:0 16px}
   #title{font-size:19px}
 }
 @media print{
@@ -157,21 +143,20 @@ main{flex:1;min-width:0;overflow:auto;-webkit-overflow-scrolling:touch;padding:v
 <body>
 <div id="app">
   <aside id="side">
-    <div class="sh"><span class="logo">생윤 개념노트</span><span class="sp"></span>
-      <button class="ib" id="bCmp" title="비교표">⇆</button><button class="ib" id="bSet" title="설정·동기화">⚙︎</button></div>
+    <div class="sh"><span class="logo">노트</span><span class="sp"></span>
+      <button class="ib" id="bSet" title="설정·동기화">⚙︎</button></div>
     <input id="q" class="search" type="search" placeholder="검색">
     <nav id="list"></nav>
-    <div class="sf"><button id="bUnit">＋ 단원</button><span id="sync" class="sync"></span></div>
+    <div class="sf"><button id="bUnit">＋ 폴더</button><span id="sync" class="sync"></span></div>
   </aside>
   <div id="scrim"></div>
   <main id="main">
     <div class="mh"><button class="ib menu-b" id="bMenu">☰</button><span class="crumb" id="crumb"></span><span class="sp"></span><button class="tbtn" id="bExp">내보내기·인쇄</button></div>
-    <div id="empty" class="empty">목록에서 개념을 고르거나<br>단원 옆 ＋ 로 새 개념을 추가하세요.</div>
+    <div id="empty" class="empty">목록에서 노트를 고르거나<br>폴더 옆 ＋ 로 새 노트를 추가하세요.</div>
     <div id="editor" hidden>
       <div class="ed-top">
-        <div class="row"><select id="unitSel"></select><input id="thinker" list="thList" placeholder="사상가 / 주제" autocomplete="off"><datalist id="thList"></datalist>
-          <span id="stars" class="stars"></span><span class="sp"></span><button class="tbtn danger" id="bDel">삭제</button></div>
-        <input id="title" placeholder="개념 제목" autocomplete="off">
+        <div class="row"><select id="unitSel"></select><button id="star" title="중요">★</button><span class="sp"></span><button class="tbtn danger" id="bDel">삭제</button></div>
+        <input id="title" placeholder="제목" autocomplete="off">
       </div>
       <div class="tbwrap" id="tbwrap">
         <div id="tb">
@@ -209,11 +194,6 @@ main{flex:1;min-width:0;overflow:auto;-webkit-overflow-scrolling:touch;padding:v
       </div>
       <div id="secs"></div>
     </div>
-    <div id="cmp" hidden>
-      <div class="row"><span class="ct">비교표</span><span class="sp"></span>
-        <button class="tbtn" id="cPrint">인쇄</button><button class="tbtn" id="cSave">HTML 저장</button><button class="tbtn" id="cClose">닫기</button></div>
-      <div class="doc" id="cmpBody"></div>
-    </div>
   </main>
 </div>
 <div id="print"></div>
@@ -225,7 +205,6 @@ const uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,7);
 const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const plain=h=>{const d=document.createElement('div');d.innerHTML=h||'';return d.textContent};
 const filled=h=>!!(h&&(plain(h).trim()||/<table/i.test(h)));
-const SECS=[['core','핵심'],['desc','설명'],['src','원문 · 키워드'],['cmp','비교 · 연관'],['exam','기출 포인트'],['warn','헷갈림 주의']];
 const LS='syn-db',LSM='syn-meta',LSG='syn-gh';
 /* 저장소: 차단된 환경이면 메모리로 대체 */
 const MEM={};
@@ -235,7 +214,17 @@ const store={
   del(k){try{localStorage.removeItem(k)}catch{delete MEM[k]}}
 };
 const jget=(k,d)=>{try{return JSON.parse(store.get(k)||'null')||d}catch{return d}};
-let db=jget(LS,{units:[],notes:[]});db.units??=[];db.notes??=[];
+/* 예전 형식(사상가 + 6칸) → 본문 한 칸으로 변환 */
+const OLD=[['core','핵심'],['desc','설명'],['src','원문 · 키워드'],['cmp','비교 · 연관'],['exam','기출 포인트'],['warn','헷갈림 주의']];
+function migrate(d){
+  d.units??=[];d.notes??=[];let ch=false;
+  d.notes.forEach(n=>{if(n.body!==undefined)return;ch=true;
+    let b=n.thinker?`<p><b>${esc(n.thinker)}</b></p>`:'';
+    OLD.forEach(([k,l])=>{if(filled(n.s?.[k]))b+=`<p><b>${l}</b></p><div>${n.s[k]}</div><p><br></p>`});
+    n.body=b;delete n.s;delete n.thinker});
+  return ch;
+}
+let db=jget(LS,{units:[],notes:[]});if(migrate(db))store.set(LS,JSON.stringify(db));
 let meta=jget(LSM,{});meta.recent??=[];meta.col??={};
 let gh=jget(LSG,{});
 
@@ -255,7 +244,7 @@ function dlg({msg,input,ok='확인',cancel='취소',danger}){
 const ask=(msg,v='')=>dlg({msg,input:v});
 const yes=(msg,o={})=>dlg({msg,...o});
 const say=msg=>dlg({msg,cancel:''});
-let cur=meta.cur||null,q='',cmpIds=null;
+let cur=meta.cur||null,q='';
 const N=()=>db.notes.find(n=>n.id===cur);
 const unitName=id=>db.units.find(u=>u.id===id)?.name||'';
 const saveMeta=()=>store.set(LSM,JSON.stringify(meta));
@@ -272,7 +261,7 @@ const SYM={
 '비교·수학':'= ≠ ≈ ≒ ≡ ≢ ≃ ≅ < > ≤ ≥ ≦ ≧ ≪ ≫ ≺ ≻ ± ∓ × ÷ · ∘ ∝ ∞ √ ∑ ∏ ∫ ∂ ∆ ∇ ′ ″ ° % ‰ ½ ⅓ ⅔ ¼ ¾ ⁺ ⁻ ¹ ² ³',
 '괄호·부호':'「 」 『 』 〈 〉 《 》 【 】 〔 〕 〖 〗 〘 〙 ‘ ’ “ ” ‹ › « » · ‥ … ¶ § † ‡ — – ― ∼ ～ ／ ＼ ＆ ＊ ＠ ＃ 〃 々 〆 ・ ˙ ˚',
 '그리스':'α β γ δ ε ζ η θ ι κ λ μ ν ξ π ρ σ τ υ φ χ ψ ω Γ Δ Θ Λ Ξ Π Σ Φ Ψ Ω',
-'윤리 한자':'仁 義 禮 智 信 忠 恕 孝 悌 慈 德 道 理 氣 性 情 心 敬 誠 善 惡 樂 法 術 勢 天 命 中庸 無爲 自然 正名 克己復禮 修己治人 性善 性惡 四端 七情 居敬 窮理 格物致知 致良知 知行合一 心卽理 性卽理 理氣 兼愛 交利 小國寡民 上善若水 逍遙遊 齊物論 心齋 坐忘 緣起 空 中道 慈悲 涅槃 解脫 八正道 四諦 一心 和諍 頓悟漸修 定慧雙修 敎觀兼修 弘益人間'
+'한자':'一 二 三 四 五 六 七 八 九 十 百 千 萬 年 月 日 時 上 下 左 右 前 後 內 外 大 小 中 長 短 高 低 新 舊 多 少 有 無 正 反 是 非 同 異 主 客 因 果 本 末 始 終 人 心 性 情 理 氣 道 德 仁 義 禮 智 信 善 惡 天 地 自然 社會 國家 文化 經濟 政治 歷史 哲學 科學 原因 結果'
 };
 let palTab=meta.recent.length?'최근':'화살표';
 function renderPal(){
@@ -283,26 +272,23 @@ function renderPal(){
 }
 
 /* ---------- 목록 ---------- */
+/* 폴더 안 노트: 중요 먼저, 그다음 최근 만든 순 */
 function ordered(unitId){
-  const g=new Map();
-  db.notes.filter(n=>n.unitId===unitId).forEach(n=>{const k=n.thinker||'';if(!g.has(k))g.set(k,[]);g.get(k).push(n)});
-  return [...g.entries()];
+  const a=db.notes.filter(n=>n.unitId===unitId).reverse();
+  return [...a.filter(n=>n.star),...a.filter(n=>!n.star)];
 }
 function renderList(){
   const ql=q.trim().toLowerCase();let h='';
   db.units.forEach(u=>{
-    let groups=ordered(u.id);
-    if(ql)groups=groups.map(([k,a])=>[k,a.filter(n=>(n.title+' '+n.thinker+' '+SECS.map(s=>plain(n.s[s[0]])).join(' ')).toLowerCase().includes(ql))]).filter(g=>g[1].length);
-    if(ql&&!groups.length)return;
-    const cnt=groups.reduce((a,g)=>a+g[1].length,0),col=!ql&&meta.col[u.id];
+    let ns=ordered(u.id);
+    if(ql)ns=ns.filter(n=>(n.title+' '+plain(n.body)).toLowerCase().includes(ql));
+    if(ql&&!ns.length)return;
+    const cnt=ns.length,col=!ql&&meta.col[u.id];
     h+=`<div class="unit"><div class="uh"><button class="ut" data-tog="${u.id}"><span class="car">${col?'›':'⌄'}</span>${esc(u.name)}</button><span class="cnt">${cnt}</span><button class="ib" data-add="${u.id}">＋</button><button class="ib" data-um="${u.id}">⋯</button></div>`;
-    if(!col)groups.forEach(([k,a])=>{
-      if(k)h+=`<div class="th">${esc(k)}</div>`;
-      a.forEach(n=>h+=`<button class="ni${n.id===cur?' on':''}" data-n="${n.id}">${n.star?`<span class="s">${'★'.repeat(n.star)}</span>`:''}${esc(n.title||'제목 없음')}</button>`);
-    });
+    if(!col)ns.forEach(n=>h+=`<button class="ni${n.id===cur?' on':''}" data-n="${n.id}">${n.star?'<span class="s">★</span>':''}${esc(n.title||'제목 없음')}</button>`);
     h+='</div>';
   });
-  $('#list').innerHTML=h||`<p class="hint">${ql?'검색 결과 없음':'＋ 단원을 눌러 시작하세요.'}</p>`;
+  $('#list').innerHTML=h||`<p class="hint">${ql?'검색 결과 없음':'＋ 폴더를 눌러 시작하세요.'}</p>`;
 }
 $('#list').addEventListener('click',e=>{
   const b=e.target.closest('button');if(!b)return;
@@ -312,14 +298,14 @@ $('#list').addEventListener('click',e=>{
   else if(b.dataset.um)unitMenu(b,b.dataset.um);
 });
 $('#q').addEventListener('input',e=>{q=e.target.value;renderList()});
-$('#bUnit').onclick=async()=>{const n=await ask('새 단원 이름');if(!n?.trim())return;db.units.push({id:uid(),name:n.trim()});persist();renderList()};
+$('#bUnit').onclick=async()=>{const n=await ask('새 폴더 이름');if(!n?.trim())return;db.units.push({id:uid(),name:n.trim()});persist();renderList()};
 function unitMenu(btn,id){
   const i=db.units.findIndex(u=>u.id===id),u=db.units[i];
   const mv=d=>{const j=i+d;if(j<0||j>=db.units.length)return;[db.units[i],db.units[j]]=[db.units[j],db.units[i]];persist();renderList()};
   menu(btn,[
-    ['이름 변경',async()=>{const n=await ask('단원 이름',u.name);if(n?.trim()){u.name=n.trim();persist();renderList();renderEditor()}}],
+    ['이름 변경',async()=>{const n=await ask('폴더 이름',u.name);if(n?.trim()){u.name=n.trim();persist();renderList();renderEditor()}}],
     ['위로',()=>mv(-1)],['아래로',()=>mv(1)],
-    ['단원 삭제',async()=>{const c=db.notes.filter(n=>n.unitId===id).length;if(!await yes(`'${u.name}' 단원과 개념 ${c}개를 삭제할까요?`,{ok:'삭제',danger:1}))return;db.notes=db.notes.filter(n=>n.unitId!==id);db.units.splice(i,1);if(!N())cur=null;persist();renderList();renderEditor()},'danger']
+    ['폴더 삭제',async()=>{const c=db.notes.filter(n=>n.unitId===id).length;if(!await yes(`'${u.name}' 폴더와 노트 ${c}개를 삭제할까요?`,{ok:'삭제',danger:1}))return;db.notes=db.notes.filter(n=>n.unitId!==id);db.units.splice(i,1);if(!N())cur=null;persist();renderList();renderEditor()},'danger']
   ]);
 }
 let menuOff=null;
@@ -334,32 +320,27 @@ function menu(anchor,items){
 
 /* ---------- 편집 ---------- */
 function addNote(unitId){
-  const c=N();const n={id:uid(),unitId,thinker:c&&c.unitId===unitId?c.thinker:'',title:'',star:0,s:{}};
+  const n={id:uid(),unitId,title:'',star:0,body:''};
   db.notes.push(n);meta.col[unitId]=false;persist();openNote(n.id);$('#title').focus();
 }
-function openNote(id){cur=id;cmpIds=null;meta.cur=id;saveMeta();renderList();renderEditor();document.body.classList.remove('side');$('#main').scrollTop=0}
+function openNote(id){cur=id;meta.cur=id;saveMeta();renderList();renderEditor();document.body.classList.remove('side');$('#main').scrollTop=0}
 function renderEditor(){
-  const n=N();$('#cmp').hidden=!cmpIds;
-  if(cmpIds){$('#editor').hidden=true;$('#empty').hidden=true;$('#crumb').textContent='비교표';return}
+  const n=N();
   $('#editor').hidden=!n;$('#empty').hidden=!!n;$('#crumb').textContent=n?unitName(n.unitId):'';
   if(!n)return;
   $('#unitSel').innerHTML=db.units.map(u=>`<option value="${u.id}"${u.id===n.unitId?' selected':''}>${esc(u.name)} ⌄</option>`).join('');
-  $('#thinker').value=n.thinker||'';$('#title').value=n.title||'';
-  $('#thList').innerHTML=[...new Set(db.notes.filter(x=>x.unitId===n.unitId&&x.thinker).map(x=>x.thinker))].map(t=>`<option value="${esc(t)}">`).join('');
-  renderStars(n);
-  $('#secs').innerHTML=SECS.map(([k,l])=>`<section class="sec sec-${k}"><div class="sl">${l}</div><div class="rt" contenteditable="true" data-k="${k}" data-ph="${l}">${n.s[k]||''}</div></section>`).join('');
+  $('#title').value=n.title||'';$('#star').classList.toggle('on',!!n.star);
+  $('#secs').innerHTML=`<div class="rt" contenteditable="true" data-ph="내용">${n.body||''}</div>`;
   $('#tbt').hidden=true;
 }
-function renderStars(n){$('#stars').innerHTML=[1,2,3].map(i=>`<button data-s="${i}" class="${i<=(n.star||0)?'on':''}">★</button>`).join('')}
-$('#stars').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;const n=N(),i=+b.dataset.s;n.star=n.star===i?i-1:i;renderStars(n);touch(n);renderList()});
+$('#star').onclick=()=>{const n=N();n.star=n.star?0:1;$('#star').classList.toggle('on',!!n.star);touch(n);renderList()};
 $('#unitSel').onchange=e=>{const n=N();n.unitId=e.target.value;touch(n);renderList();renderEditor()};
 let lt;
-$('#thinker').oninput=e=>{const n=N();n.thinker=e.target.value.trim();touch(n);clearTimeout(lt);lt=setTimeout(renderList,500)};
 $('#title').oninput=e=>{const n=N();n.title=e.target.value;touch(n);clearTimeout(lt);lt=setTimeout(renderList,300)};
-$('#bDel').onclick=async()=>{const n=N();if(!await yes(`'${n.title||'제목 없음'}' 개념을 삭제할까요?`,{ok:'삭제',danger:1}))return;db.notes=db.notes.filter(x=>x!==n);cur=null;persist();renderList();renderEditor()};
+$('#bDel').onclick=async()=>{const n=N();if(!await yes(`'${n.title||'제목 없음'}' 노트를 삭제할까요?`,{ok:'삭제',danger:1}))return;db.notes=db.notes.filter(x=>x!==n);cur=null;persist();renderList();renderEditor()};
 $('#secs').addEventListener('input',e=>{
   const rt=e.target.closest('.rt');if(!rt)return;const n=N();
-  let h=rt.innerHTML;if(!filled(h))h='';n.s[rt.dataset.k]=h;touch(n);
+  let h=rt.innerHTML;if(!filled(h))h='';n.body=h;touch(n);
 });
 $('#secs').addEventListener('focusout',e=>{const rt=e.target.closest?.('.rt');if(rt&&!filled(rt.innerHTML))rt.innerHTML=''});
 $('#secs').addEventListener('paste',e=>{if(!e.target.closest('.rt'))return;e.preventDefault();document.execCommand('insertText',false,e.clipboardData.getData('text/plain'))});
@@ -421,7 +402,7 @@ $('#pal').addEventListener('click',e=>{
   if(b.dataset.tab){palTab=b.dataset.tab;renderPal();return}
   const s=b.dataset.sym;if(!s)return;
   const a=document.activeElement;
-  if(a&&(a.id==='title'||a.id==='thinker')){a.setRangeText(s,a.selectionStart,a.selectionEnd,'end');a.dispatchEvent(new Event('input'))}
+  if(a&&a.id==='title'){a.setRangeText(s,a.selectionStart,a.selectionEnd,'end');a.dispatchEvent(new Event('input'))}
   else{if(!restore())return;ex('insertText',s);fire()}
   meta.recent=[s,...meta.recent.filter(x=>x!==s)].slice(0,30);saveMeta();if(palTab==='최근')renderPal();
 });
@@ -431,45 +412,31 @@ const DOC_CSS=`
 .doc{font:300 10.5pt/1.75 "Pretendard Variable",Pretendard,-apple-system,"Apple SD Gothic Neo",sans-serif;color:#353535;letter-spacing:-.01em;word-break:keep-all}
 .doc h1{font-size:15pt;font-weight:500;margin:0 0 6mm;padding-bottom:2mm;border-bottom:.6pt solid #5f7c9c;color:#3b3b3b}
 .doc .unit+.unit{break-before:page;margin-top:10mm}
-.doc .grp{font-size:9pt;color:#5f7c9c;margin:5mm 0 1mm;font-weight:400}
 .doc .note{padding:0 0 6mm;margin:0 0 6mm;border-bottom:.5pt solid #e2dfd9}
 .doc .note:last-child{border:0}
 .doc .meta{font-size:8.5pt;color:#9a968f}
 .doc h2{font-size:12.5pt;font-weight:500;margin:.5mm 0 3mm;break-after:avoid}
-.doc h3{font-size:8pt;font-weight:400;color:#9a968f;margin:3.5mm 0 .5mm;letter-spacing:.06em;break-after:avoid}
-.doc .s-core .b{color:#5f7c9c;font-weight:400}
 .doc .st{color:#5f7c9c;font-size:8.5pt;font-weight:300}
 .doc p,.doc .b div{margin:0}
 .doc ul,.doc ol{margin:1mm 0;padding-left:6mm}
 .doc table{border-collapse:collapse;width:100%;margin:2mm 0;font-size:9.5pt}
 .doc td,.doc th{border:.5pt solid #cfccc5;padding:1.5mm 2.5mm;vertical-align:top;text-align:left;font-weight:300}
 .doc tr{break-inside:avoid}
-.doc table.hd tr:first-child>*,.doc table.hc tr>*:first-child,.doc .cmpt th{background:#f1f0ec;font-weight:500}
-.doc .cmpt th small{display:block;font-weight:300;color:#9a968f;font-size:8pt}
-.doc .cmpt td,.doc .cmpt th{min-width:28mm}
-.doc .cmpt tr>th:first-child{width:22mm;color:#7d7a74;font-size:8.5pt}
+.doc table.hd tr:first-child>*,.doc table.hc tr>*:first-child{background:#f1f0ec;font-weight:500}
 @page{size:A4;margin:16mm 15mm}
 @media print{.doc,.doc *{-webkit-print-color-adjust:exact;print-color-adjust:exact}}`;
 document.head.insertAdjacentHTML('beforeend',`<style>${DOC_CSS}</style>`);
 function noteHTML(n,showMeta=true){
-  return `<article class="note">${showMeta?`<div class="meta">${esc(unitName(n.unitId))}${n.thinker?' › '+esc(n.thinker):''}</div>`:''}<h2>${esc(n.title||'제목 없음')} ${n.star?`<span class="st">${'★'.repeat(n.star)}</span>`:''}</h2>`+
-  SECS.filter(([k])=>filled(n.s[k])).map(([k,l])=>`<section class="s-${k}"><h3>${l}</h3><div class="b">${n.s[k]}</div></section>`).join('')+`</article>`;
+  return `<article class="note">${showMeta?`<div class="meta">${esc(unitName(n.unitId))}</div>`:''}<h2>${esc(n.title||'제목 없음')} ${n.star?'<span class="st">★</span>':''}</h2><div class="b">${n.body||''}</div></article>`;
 }
 function unitHTML(u){
-  return `<div class="unit"><h1>${esc(u.name)}</h1>`+ordered(u.id).map(([k,a])=>(k?`<div class="grp">${esc(k)}</div>`:'')+a.map(n=>noteHTML(n,false)).join('')).join('')+`</div>`;
-}
-function compareHTML(ids){
-  const ns=ids.map(id=>db.notes.find(n=>n.id===id)).filter(Boolean);
-  const rows=SECS.filter(([k])=>ns.some(n=>filled(n.s[k])));
-  return `<table class="cmpt"><tr><th></th>${ns.map(n=>`<th>${esc(n.title||'제목 없음')}${n.thinker?`<small>${esc(n.thinker)}</small>`:''}</th>`).join('')}</tr>`+
-    rows.map(([k,l])=>`<tr><th>${l}</th>${ns.map(n=>`<td${k==='core'?' style="color:#5f7c9c"':''}>${n.s[k]||''}</td>`).join('')}</tr>`).join('')+`</table>`;
+  return `<div class="unit"><h1>${esc(u.name)}</h1>`+ordered(u.id).map(n=>noteHTML(n,false)).join('')+`</div>`;
 }
 function scope(sc){
   const n=N();
-  if(sc==='cmp')return{t:'비교표',b:`<h1>비교표</h1>`+compareHTML(cmpIds)};
-  if(sc==='note'&&n)return{t:n.title||'개념',b:noteHTML(n)};
+  if(sc==='note'&&n)return{t:n.title||'노트',b:noteHTML(n)};
   if(sc==='unit'&&n){const u=db.units.find(u=>u.id===n.unitId);return{t:u.name,b:unitHTML(u)}}
-  return{t:'생윤 개념노트',b:db.units.map(unitHTML).join('')};
+  return{t:'노트',b:db.units.map(unitHTML).join('')};
 }
 function saveHTML({t,b}){
   const doc=`<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${esc(t)}</title>
@@ -484,32 +451,17 @@ function download(name,text,type){
 }
 function printDoc({b}){$('#print').innerHTML=`<div class="doc">${b}</div>`;setTimeout(()=>print(),60)}
 $('#bExp').onclick=()=>{
-  const n=N(),hasN=n&&!cmpIds;
+  const n=N();
   modal(`<h4>내보내기 · 인쇄</h4>
-    ${cmpIds?`<label class="opt"><input type="radio" name="sc" value="cmp" checked>현재 비교표</label>`:''}
-    <label class="opt"><input type="radio" name="sc" value="note" ${hasN?'checked':'disabled'}>현재 개념</label>
-    <label class="opt"><input type="radio" name="sc" value="unit" ${n?'':'disabled'}>현재 단원 전체</label>
-    <label class="opt"><input type="radio" name="sc" value="all" ${!n&&!cmpIds?'checked':''}>모든 단원</label>
-    <div class="note-s">A4 기준 · 단원마다 새 페이지</div>
+    <label class="opt"><input type="radio" name="sc" value="note" ${n?'checked':'disabled'}>현재 노트</label>
+    <label class="opt"><input type="radio" name="sc" value="unit" ${n?'':'disabled'}>현재 폴더 전체</label>
+    <label class="opt"><input type="radio" name="sc" value="all" ${n?'':'checked'}>모든 폴더</label>
+    <div class="note-s">A4 기준 · 폴더마다 새 페이지</div>
     <div class="mrow"><button class="tbtn" data-x>닫기</button><span class="sp"></span><button class="tbtn" id="xPrint">인쇄</button><button class="tbtn pri" id="xSave">HTML 저장</button></div>`);
   const sc=()=>document.querySelector('input[name=sc]:checked')?.value||'all';
   $('#xSave').onclick=()=>{saveHTML(scope(sc()));closeModal()};
   $('#xPrint').onclick=()=>{const s=scope(sc());closeModal();printDoc(s)};
 };
-
-/* ---------- 비교표 ---------- */
-$('#bCmp').onclick=()=>{
-  let h='';db.units.forEach(u=>{const ns=db.notes.filter(n=>n.unitId===u.id);if(!ns.length)return;
-    h+=`<div class="pu">${esc(u.name)}</div>`+ns.map(n=>`<label data-tx="${esc((n.title+' '+n.thinker).toLowerCase())}"><input type="checkbox" value="${n.id}" ${cmpIds?.includes(n.id)?'checked':''}>${esc(n.title||'제목 없음')} <small>${esc(n.thinker||'')}</small></label>`).join('')});
-  modal(`<h4>비교할 개념 선택</h4><input class="search fi" id="cq" type="search" placeholder="검색"><div class="pick" id="pick">${h||'<p class="hint">개념이 없습니다.</p>'}</div>
-    <div class="mrow"><button class="tbtn" data-x>취소</button><span class="sp"></span><button class="tbtn pri" id="cGo">비교표 만들기</button></div>`);
-  $('#cq').oninput=e=>{const v=e.target.value.toLowerCase();document.querySelectorAll('#pick label').forEach(l=>l.hidden=!l.dataset.tx.includes(v))};
-  $('#cGo').onclick=()=>{const ids=[...document.querySelectorAll('#pick input:checked')].map(i=>i.value);if(ids.length<2)return say('2개 이상 선택하세요.');
-    cmpIds=ids;closeModal();document.body.classList.remove('side');$('#cmpBody').innerHTML=compareHTML(ids);renderEditor();$('#main').scrollTop=0};
-};
-$('#cClose').onclick=()=>{cmpIds=null;renderEditor()};
-$('#cPrint').onclick=()=>printDoc(scope('cmp'));
-$('#cSave').onclick=()=>saveHTML(scope('cmp'));
 
 /* ---------- 모달 ---------- */
 function modal(h){$('#mbox').innerHTML=h;$('#modal').hidden=false;$('#mbox').querySelectorAll('[data-x]').forEach(b=>b.onclick=closeModal)}
@@ -519,7 +471,7 @@ $('#modal').addEventListener('click',e=>{if(e.target.id==='modal')closeModal()})
 /* ---------- GitHub 동기화 ---------- */
 const ghOK=()=>gh.token&&gh.owner&&gh.repo;
 const H=()=>({Authorization:'Bearer '+gh.token,Accept:'application/vnd.github+json'});
-const api=()=>`https://api.github.com/repos/${gh.owner}/${gh.repo}/contents/${(gh.path||'saengyun-notes.json').split('/').map(encodeURIComponent).join('/')}`;
+const api=()=>`https://api.github.com/repos/${gh.owner}/${gh.repo}/contents/${(gh.path||'notes.json').split('/').map(encodeURIComponent).join('/')}`;
 const b64e=s=>{const b=new TextEncoder().encode(s);let r='';for(let i=0;i<b.length;i+=0x8000)r+=String.fromCharCode.apply(null,b.subarray(i,i+0x8000));return btoa(r)};
 const b64d=s=>new TextDecoder().decode(Uint8Array.from(atob(s.replace(/\s/g,'')),c=>c.charCodeAt(0)));
 async function ghGet(){
@@ -538,9 +490,9 @@ async function ghPut(){
   const j=await r.json();meta.sha=j.content.sha;meta.dirty=false;meta.at=Date.now();saveMeta();
 }
 function applyRemote(rem){
-  db=rem.data;db.units??=[];db.notes??=[];store.set(LS,JSON.stringify(db));
+  db=rem.data;migrate(db);store.set(LS,JSON.stringify(db));
   meta.sha=rem.sha;meta.dirty=false;meta.at=Date.now();saveMeta();
-  if(!N())cur=null;if(cmpIds)cmpIds=null;renderList();renderEditor();
+  if(!N())cur=null;renderList();renderEditor();
 }
 let syncing=false,syncErr='',pushT;
 async function sync(retry=true){
@@ -573,18 +525,18 @@ $('#bSet').onclick=()=>{
     <label class="fl">소유자 (아이디)</label><input class="fi" id="gO" value="${esc(gh.owner||'')}" autocapitalize="off">
     <label class="fl">저장소</label><input class="fi" id="gR" value="${esc(gh.repo||'')}" autocapitalize="off">
     <label class="fl">브랜치</label><input class="fi" id="gB" value="${esc(gh.branch||'main')}" autocapitalize="off">
-    <label class="fl">파일 경로</label><input class="fi" id="gP" value="${esc(gh.path||'saengyun-notes.json')}" autocapitalize="off">
+    <label class="fl">파일 경로</label><input class="fi" id="gP" value="${esc(gh.path||'notes.json')}" autocapitalize="off">
     <div class="note-s">Fine-grained: 해당 저장소만 · Contents 읽기/쓰기<br>Classic: <b>repo</b> 권한 체크<br>토큰은 이 기기에만 저장됩니다. 두 기기 모두 같은 값으로 설정하세요.</div>
     <div class="mrow"><button class="tbtn pri" id="gS">저장 후 동기화</button><button class="tbtn" id="gX">연결 해제</button></div>
     <label class="fl" style="margin-top:18px">백업</label>
     <div class="mrow" style="margin-top:4px"><button class="tbtn" id="jE">JSON 백업 저장</button><button class="tbtn" id="jI">JSON 불러오기</button><span class="sp"></span><button class="tbtn" data-x>닫기</button></div>
     <input type="file" id="jF" accept=".json,application/json" hidden>`);
-  $('#gS').onclick=()=>{gh={token:$('#gT').value.trim(),owner:$('#gO').value.trim(),repo:$('#gR').value.trim(),branch:$('#gB').value.trim()||'main',path:$('#gP').value.trim()||'saengyun-notes.json'};
+  $('#gS').onclick=()=>{gh={token:$('#gT').value.trim(),owner:$('#gO').value.trim(),repo:$('#gR').value.trim(),branch:$('#gB').value.trim()||'main',path:$('#gP').value.trim()||'notes.json'};
     store.set(LSG,JSON.stringify(gh));meta.sha=null;saveMeta();closeModal();sync()};
   $('#gX').onclick=async()=>{if(!await yes('동기화 연결을 해제할까요? (노트는 유지)'))return;gh={};store.del(LSG);meta.sha=null;saveMeta();closeModal();renderStatus()};
-  $('#jE').onclick=()=>download('saengyun-notes-'+new Date().toISOString().slice(0,10)+'.json',JSON.stringify(db,null,1),'application/json');
+  $('#jE').onclick=()=>download('notes-'+new Date().toISOString().slice(0,10)+'.json',JSON.stringify(db,null,1),'application/json');
   $('#jI').onclick=()=>$('#jF').click();
-  $('#jF').onchange=async e=>{const f=e.target.files[0];if(!f)return;try{const d=JSON.parse(await f.text());if(!Array.isArray(d.units)||!Array.isArray(d.notes))throw 0;
+  $('#jF').onchange=async e=>{const f=e.target.files[0];if(!f)return;try{const d=JSON.parse(await f.text());if(!Array.isArray(d.units)||!Array.isArray(d.notes))throw 0;migrate(d);
     if(!await yes('현재 노트를 백업 내용으로 바꿀까요?'))return;db=d;cur=null;persist();renderList();renderEditor();closeModal()}catch{say('올바른 백업 파일이 아닙니다.')}};
 };
 

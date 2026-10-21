@@ -1,6 +1,6 @@
 {
-  "name": "생윤 개념노트",
-  "short_name": "생윤노트",
+  "name": "노트",
+  "short_name": "노트",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
