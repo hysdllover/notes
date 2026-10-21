@@ -15,7 +15,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <style>
 :root{--bg:#fff;--panel:#fff;--ink:#3b3b3b;--sub:#9a968f;--line:#e6e3dd;--soft:#efede8;
---blue:#5f7c9c;--blue-l:#e4eaf1;--hl-y:#f2e8c4;--hl-b:#dae3ee;--hl-p:#eedcdb;--hl-g:#dee8db;
+--blue:#5f7c9c;--red:#ad6f6a;--green:#6b8c66;--gray:#9a968f;--blue-l:#e4eaf1;--hl-y:#f2e8c4;--hl-b:#dae3ee;--hl-p:#eedcdb;--hl-g:#dee8db;
 --f:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo",sans-serif;
 --st:env(safe-area-inset-top);--sb:env(safe-area-inset-bottom);--sl:env(safe-area-inset-left);--sr:env(safe-area-inset-right)}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
@@ -83,7 +83,7 @@ main{flex:1;min-width:0;overflow:auto;-webkit-overflow-scrolling:touch;padding:v
 .sw{width:18px!important;min-width:18px!important;height:18px!important;padding:0!important;border-radius:50%!important;margin:0 3px;border:1px solid rgba(0,0,0,.06)!important}
 .sw-y{background:var(--hl-y)!important}.sw-b{background:var(--hl-b)!important}.sw-p{background:var(--hl-p)!important}.sw-g{background:var(--hl-g)!important}
 .sw-n{background:#fff!important;position:relative}.sw-n::after{content:"";position:absolute;left:2px;right:2px;top:50%;height:1px;background:#c9a3a0;transform:rotate(-45deg)}
-.cb{color:var(--blue)!important;font-weight:500}
+.fc{font-weight:600;text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:4px}
 #pal{margin-top:6px;border:1px solid var(--line);border-radius:10px;background:#fff;padding:6px}
 #palTabs{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;padding-bottom:4px;border-bottom:1px solid var(--soft)}
 #palTabs::-webkit-scrollbar{display:none}
@@ -118,7 +118,7 @@ main{flex:1;min-width:0;overflow:auto;-webkit-overflow-scrolling:touch;padding:v
 .rt table.hd tr:first-child>*,.rt table.hc tr>*:first-child{background:#f1f0ec;font-weight:500}
 
 /* menu / modal */
-.menu{position:fixed;z-index:50;background:#fff;border:1px solid var(--line);border-radius:10px;box-shadow:0 6px 24px rgba(0,0,0,.08);padding:4px;min-width:130px}
+.menu{position:fixed;z-index:50;max-height:70dvh;overflow:auto;background:#fff;border:1px solid var(--line);border-radius:10px;box-shadow:0 6px 24px rgba(0,0,0,.08);padding:4px;min-width:130px}
 .menu button{display:block;width:100%;text-align:left;padding:7px 12px;border-radius:7px;font-size:13px}
 .menu button:hover{background:var(--soft)}
 .menu .danger{color:#b27a76}
@@ -174,8 +174,11 @@ main{flex:1;min-width:0;overflow:auto;-webkit-overflow-scrolling:touch;padding:v
           <button data-c="bold"><b>B</b></button>
           <button data-c="underline"><u>U</u></button>
           <button data-c="strikeThrough"><s>S</s></button>
-          <button data-c="blue" class="cb" title="포인트색">A</button>
-          <button data-c="ink" title="기본색">A̶</button>
+          <button data-fc="--ink" class="fc" style="color:var(--ink)!important" title="검정">A</button>
+          <button data-fc="--blue" class="fc" style="color:var(--blue)!important" title="파랑">A</button>
+          <button data-fc="--red" class="fc" style="color:var(--red)!important" title="빨강">A</button>
+          <button data-fc="--green" class="fc" style="color:var(--green)!important" title="초록">A</button>
+          <button data-fc="--gray" class="fc" style="color:var(--gray)!important" title="회색">A</button>
           <span class="sep"></span>
           <button class="sw sw-y" data-hl="--hl-y" title="형광펜"></button>
           <button class="sw sw-b" data-hl="--hl-b" title="형광펜"></button>
@@ -183,8 +186,8 @@ main{flex:1;min-width:0;overflow:auto;-webkit-overflow-scrolling:touch;padding:v
           <button class="sw sw-g" data-hl="--hl-g" title="형광펜"></button>
           <button class="sw sw-n" data-hl="none" title="형광펜 지우기"></button>
           <span class="sep"></span>
-          <button data-c="insertUnorderedList">•≡</button>
-          <button data-c="insertOrderedList">1≡</button>
+          <button data-c="ul" title="글머리 목록">•≡ ▾</button>
+          <button data-c="ol" title="번호 목록">1≡ ▾</button>
           <button data-c="outdent">⇤</button>
           <button data-c="indent">⇥</button>
           <span class="sep"></span>
@@ -323,7 +326,7 @@ function unitMenu(btn,id){
 let menuOff=null;
 function closeMenu(){document.querySelector('.menu')?.remove();if(menuOff){document.removeEventListener('click',menuOff);menuOff=null}}
 function menu(anchor,items){
-  closeMenu();const m=document.createElement('div');m.className='menu';
+  closeMenu();const m=document.createElement('div');m.className='menu';m.addEventListener('mousedown',e=>e.preventDefault());
   items.forEach(([l,f,c])=>{const b=document.createElement('button');b.textContent=l;if(c)b.className=c;b.onclick=e=>{e.stopPropagation();closeMenu();f()};m.appendChild(b)});
   document.body.appendChild(m);const r=anchor.getBoundingClientRect();
   m.style.top=Math.min(r.bottom+4,innerHeight-m.offsetHeight-8)+'px';m.style.left=Math.max(8,Math.min(r.left,innerWidth-m.offsetWidth-8))+'px';
@@ -383,15 +386,33 @@ const css=v=>getComputedStyle(document.documentElement).getPropertyValue(v).trim
 $('#tb').addEventListener('click',e=>{
   const b=e.target.closest('button');if(!b)return;
   if(b.dataset.hl){if(!restore())return;ex('hiliteColor',b.dataset.hl==='none'?'transparent':css(b.dataset.hl));fire();return}
+  if(b.dataset.fc){if(!restore())return;ex('foreColor',css(b.dataset.fc));fire();return}
   const c=b.dataset.c;
   if(c==='sym'){const p=$('#pal');p.hidden=!p.hidden;b.classList.toggle('act',!p.hidden);if(!p.hidden)renderPal();return}
   if(c==='table')return insTable();
+  if(c==='ul'||c==='ol')return listMenu(b,c);
   if(!restore())return;
-  if(c==='blue')ex('foreColor',css('--blue'));
-  else if(c==='ink')ex('foreColor',css('--ink'));
-  else ex(c);
+  ex(c);
   fire();
 });
+/* 목록 모양 */
+const LIST={
+  ul:[['• 원형','disc'],['◦ 빈 원','circle'],['▪ 사각','square'],['– 하이픈','"– "'],['→ 화살표','"→ "'],['✓ 체크','"✓ "'],['※ 참고','"※ "'],['★ 별','"★ "']],
+  ol:[['1. 숫자','decimal'],['(1) 괄호','paren'],['① 원문자','circled'],['가. 한글','hg'],['ㄱ. 자음','hgc'],['a. 영문','lower-alpha'],['A. 대문자','upper-alpha'],['i. 로마자','lower-roman'],['Ⅰ. 로마자','upper-roman']]
+};
+function curList(){
+  const s=getSelection();if(!s.rangeCount||!activeRt)return null;let n=s.getRangeAt(0).startContainer;
+  n=n.nodeType===1?n:n.parentElement;const l=n?.closest?.('ul,ol');return l&&activeRt.contains(l)?l:null;
+}
+function setList(tag,type){
+  if(!restore())return;let l=curList();
+  if(!l||l.tagName.toLowerCase()!==tag){ex(tag==='ul'?'insertUnorderedList':'insertOrderedList');l=curList()}
+  if(l)l.style.listStyleType=type==='disc'||type==='decimal'?'':type;
+  fire();
+}
+function listMenu(b,tag){
+  menu(b,[...LIST[tag].map(([l,v])=>[l,()=>setList(tag,v)]),['목록 해제',()=>{if(!restore())return;const l=curList();if(l){ex(l.tagName==='UL'?'insertUnorderedList':'insertOrderedList');fire()}}]]);
+}
 async function insTable(){
   const v=await ask('표 크기 (행 x 열)','3x3');const m=v&&v.match(/(\d+)\D+(\d+)/);if(!m)return;
   const r=Math.min(+m[1],30),c=Math.min(+m[2],10);if(!r||!c||!restore())return;
@@ -484,6 +505,10 @@ $('#pal').addEventListener('click',e=>{
 
 /* ---------- 출력 (HTML · 인쇄) ---------- */
 const DOC_CSS=`
+@counter-style paren{system:extends decimal;prefix:"(";suffix:") "}
+@counter-style circled{system:fixed;symbols:"①" "②" "③" "④" "⑤" "⑥" "⑦" "⑧" "⑨" "⑩" "⑪" "⑫" "⑬" "⑭" "⑮" "⑯" "⑰" "⑱" "⑲" "⑳";suffix:" "}
+@counter-style hg{system:alphabetic;symbols:"가" "나" "다" "라" "마" "바" "사" "아" "자" "차" "카" "타" "파" "하";suffix:". "}
+@counter-style hgc{system:alphabetic;symbols:"ㄱ" "ㄴ" "ㄷ" "ㄹ" "ㅁ" "ㅂ" "ㅅ" "ㅇ" "ㅈ" "ㅊ" "ㅋ" "ㅌ" "ㅍ" "ㅎ";suffix:". "}
 .doc{font:300 10.5pt/1.75 "Pretendard Variable",Pretendard,-apple-system,"Apple SD Gothic Neo",sans-serif;color:#353535;letter-spacing:-.01em;word-break:keep-all}
 .doc h1{font-size:15pt;font-weight:500;margin:0 0 6mm;padding-bottom:2mm;border-bottom:.6pt solid #5f7c9c;color:#3b3b3b}
 .doc .unit+.unit{break-before:page;margin-top:10mm}
