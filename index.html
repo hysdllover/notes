@@ -574,7 +574,7 @@ $('#bSet').onclick=()=>{
     <label class="fl">저장소</label><input class="fi" id="gR" value="${esc(gh.repo||'')}" autocapitalize="off">
     <label class="fl">브랜치</label><input class="fi" id="gB" value="${esc(gh.branch||'main')}" autocapitalize="off">
     <label class="fl">파일 경로</label><input class="fi" id="gP" value="${esc(gh.path||'saengyun-notes.json')}" autocapitalize="off">
-    <div class="note-s">Fine-grained token · 해당 저장소만 선택 · Contents 읽기/쓰기 권한.<br>토큰은 이 기기에만 저장됩니다. 두 기기 모두 같은 값으로 설정하세요.</div>
+    <div class="note-s">Fine-grained: 해당 저장소만 · Contents 읽기/쓰기<br>Classic: <b>repo</b> 권한 체크<br>토큰은 이 기기에만 저장됩니다. 두 기기 모두 같은 값으로 설정하세요.</div>
     <div class="mrow"><button class="tbtn pri" id="gS">저장 후 동기화</button><button class="tbtn" id="gX">연결 해제</button></div>
     <label class="fl" style="margin-top:18px">백업</label>
     <div class="mrow" style="margin-top:4px"><button class="tbtn" id="jE">JSON 백업 저장</button><button class="tbtn" id="jI">JSON 불러오기</button><span class="sp"></span><button class="tbtn" data-x>닫기</button></div>
@@ -594,7 +594,21 @@ $('#scrim').onclick=()=>document.body.classList.remove('side');
 if(!N())cur=null;
 renderList();renderEditor();renderStatus();
 if(ghOK())sync();
-if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js').catch(()=>{});
+/* ---------- 앱 업데이트: 새 버전이 올라오면 자동 새로고침 ---------- */
+let swReg=null,appTag=null;
+const hadSW=!!navigator.serviceWorker?.controller;
+if('serviceWorker' in navigator){
+  navigator.serviceWorker.register('sw.js',{updateViaCache:'none'}).then(r=>swReg=r).catch(()=>{});
+  navigator.serviceWorker.addEventListener('controllerchange',()=>{if(hadSW)reloadApp()});
+}
+const pageTag=()=>fetch('index.html?_='+Date.now(),{method:'HEAD',cache:'no-store'}).then(r=>r.ok?(r.headers.get('etag')||r.headers.get('last-modified')):null).catch(()=>null);
+function reloadApp(){if(meta.dirty||pt){clearTimeout(pt);persist()}location.reload()}
+pageTag().then(t=>appTag=t);
+document.addEventListener('visibilitychange',async()=>{
+  if(document.visibilityState!=='visible')return;
+  swReg?.update().catch(()=>{});
+  const t=await pageTag();if(t&&appTag&&t!==appTag)reloadApp();else if(t)appTag=t;
+});
 </script>
 </body>
 </html>
